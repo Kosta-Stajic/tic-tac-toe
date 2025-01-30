@@ -20,6 +20,19 @@ body {
     height:100%;
 }
 
+.main {
+    display:grid;
+    padding: 50px;
+    margin: 100px;
+    justify-content: center;
+    grid-template-rows: 0.4fr 0.4fr 0.4fr;
+    grid-template-columns:0.15fr 0.15fr 0.15fr;
+}
+
+button {
+    font-size: larger;
+}
+
 .footer {
     display:grid;
     justify-content: center;

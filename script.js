@@ -1,3 +1,11 @@
+//querry selectors
+
+const buttons = document.querySelectorAll(".cell")
+const buttonsArray = Array.from(buttons)
+
+//onclick populate with X or O
+    
+
 
 //This object creates a 3x3 array and pushes Cell() values into it.
 function gameBoard() {
@@ -135,20 +143,36 @@ function gameController(playerOneName = "Player One", playerTwoName = "Player Tw
             row.every(cell => cell.getValue() !== 0)
         );
     };
-   
+
+
+    buttonsArray.forEach(button => {
+        button.addEventListener('click', function() {
+           
+           const currentPlayer = game.getActivePlayer().token;
+           if (currentPlayer === 1 ){
+           button.textContent = "X";
+           } else if (currentPlayer === 2) {
+            button.textContent ="O"
+           }
+           game.playRound({row:button.getAttribute("data-row"), column:button.getAttribute("data-column")})
+        })})
+    
 
     //main function for playing rounds, run it with game.playRound
     const playRound = (position) => {
         board.dropToken(position, getActivePlayer().token);
+        buttonsArray.textContent = getActivePlayer().token
+        switchPlayerTurn();
+       
         printNewRound();
         if (checkWinner()) {
-            console.log(`${getActivePlayer().name} wins!`);
+            alert(`${getActivePlayer().name} wins!`);
             return true;  // Game is over
         }
-        switchPlayerTurn();
+        
           
     
-    }
+    } 
     
     printNewRound()
 
@@ -159,6 +183,5 @@ function gameController(playerOneName = "Player One", playerTwoName = "Player Tw
         
     }
 }
-
 
 const game = gameController();
